@@ -213,7 +213,7 @@ export function About() {
             >
               {[
                 { icon: '📍', text: 'Bengaluru, India' },
-                { icon: '🎓', text: 'B.Sc. CS · Presidency University' },
+                { icon: '🎓', text: 'B.Tech. CS · Presidency University' },
                 { icon: '✉️', text: 'vinayg1752004@gmail.com' },
               ].map(({ icon, text }) => (
                 <span
