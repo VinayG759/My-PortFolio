@@ -50,21 +50,55 @@ function SkillBar({ name, level, color, index }: { name: string; level: number; 
 }
 
 function OrbitRing() {
-  const orbitSkills = [
-    { name: 'Python', abbr: 'PY', color: '#3B82F6', r: 140, speed: 18 },
-    { name: 'React', abbr: 'Re', color: '#61DAFB', r: 140, speed: 18, offset: 60 },
-    { name: 'TypeScript', abbr: 'TS', color: '#3178C6', r: 140, speed: 18, offset: 120 },
-    { name: 'TensorFlow', abbr: 'TF', color: '#FF6F00', r: 140, speed: 18, offset: 180 },
-    { name: 'FastAPI', abbr: 'FA', color: '#009688', r: 140, speed: 18, offset: 240 },
-    { name: 'Groq LLM', abbr: 'AI', color: '#10B981', r: 140, speed: 18, offset: 300 },
-    { name: 'PostgreSQL', abbr: 'PG', color: '#336791', r: 80, speed: -12 },
-    { name: 'Git', abbr: 'Git', color: '#F05032', r: 80, speed: -12, offset: 120 },
-    { name: 'Vite', abbr: 'Vi', color: '#646CFF', r: 80, speed: -12, offset: 240 },
+  const outerSkills = [
+    { name: 'Python',     abbr: 'PY',  color: '#3B82F6' },
+    { name: 'React',      abbr: 'Re',  color: '#61DAFB' },
+    { name: 'TypeScript', abbr: 'TS',  color: '#3178C6' },
+    { name: 'TensorFlow', abbr: 'TF',  color: '#FF6F00' },
+    { name: 'FastAPI',    abbr: 'FA',  color: '#009688' },
+    { name: 'Groq LLM',  abbr: 'AI',  color: '#10B981' },
   ];
 
+  const innerSkills = [
+    { name: 'PostgreSQL', abbr: 'PG',  color: '#336791' },
+    { name: 'Git',        abbr: 'Git', color: '#F05032' },
+    { name: 'Vite',       abbr: 'Vi',  color: '#646CFF' },
+  ];
+
+  const OUTER_R = 145;
+  const INNER_R = 82;
+  const ICON    = 40;
+
+  function OrbitIcon({ name, abbr, color }: { name: string; abbr: string; color: string }) {
+    return (
+      <motion.div
+        whileHover={{ scale: 1.3 }}
+        className="group relative w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono"
+        style={{ background: `${color}18`, border: `1px solid ${color}40`, color }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 0 16px ${color}60`; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+      >
+        {abbr}
+        <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-mono bg-navy-dark border border-electric/20 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+          {name}
+        </span>
+      </motion.div>
+    );
+  }
+
   return (
-    <div className="relative flex items-center justify-center w-full h-[340px]">
-      {/* Center dot */}
+    <div className="relative flex items-center justify-center w-full h-[360px]">
+      {/* Visual orbit rings */}
+      <div
+        className="absolute rounded-full border border-dashed border-electric/10"
+        style={{ width: OUTER_R * 2, height: OUTER_R * 2 }}
+      />
+      <div
+        className="absolute rounded-full border border-dashed border-teal-portfolio/15"
+        style={{ width: INNER_R * 2, height: INNER_R * 2 }}
+      />
+
+      {/* Center hub */}
       <div
         className="absolute w-14 h-14 rounded-full flex items-center justify-center z-10 font-bold text-lg gradient-text font-mono"
         style={{
@@ -76,68 +110,49 @@ function OrbitRing() {
         VG
       </div>
 
-      {/* Orbit rings */}
-      <div
-        className="absolute w-[280px] h-[280px] rounded-full border border-dashed border-electric/10"
-      />
-      <div
-        className="absolute w-[160px] h-[160px] rounded-full border border-dashed border-teal-portfolio/15"
-      />
-
-      {/* Orbiting icons */}
-      {orbitSkills.map((skill) => (
-        <motion.div
-          key={skill.name}
-          className="absolute"
-          style={{ width: skill.r * 2, height: skill.r * 2 }}
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: Math.abs(skill.speed),
-            repeat: Infinity,
-            ease: 'linear',
-            direction: skill.speed > 0 ? 'normal' : 'reverse',
-          }}
-        >
+      {/* Outer orbit — clockwise */}
+      {outerSkills.map((skill, i) => {
+        const start = (360 / outerSkills.length) * i;
+        return (
           <motion.div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: '50%',
-              transform: `translateX(-50%) rotate(${skill.offset ?? 0}deg) translateY(-${skill.r}px)`,
-            }}
-            animate={{ rotate: -360 }}
-            transition={{
-              duration: Math.abs(skill.speed),
-              repeat: Infinity,
-              ease: 'linear',
-              direction: skill.speed > 0 ? 'normal' : 'reverse',
-            }}
+            key={skill.name}
+            className="absolute"
+            style={{ width: 0, height: 0, left: '50%', top: '50%' }}
+            animate={{ rotate: [start, start + 360] }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
           >
             <motion.div
-              whileHover={{ scale: 1.3 }}
-              className="group relative w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold font-mono transition-all"
-              style={{
-                background: `${skill.color}18`,
-                border: `1px solid ${skill.color}40`,
-                color: skill.color,
-                boxShadow: `0 0 0 ${skill.color}00`,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 16px ${skill.color}60`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 ${skill.color}00`;
-              }}
+              style={{ position: 'absolute', top: -(OUTER_R + ICON / 2), left: -(ICON / 2) }}
+              animate={{ rotate: [-start, -start - 360] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
             >
-              {skill.abbr}
-              {/* Tooltip */}
-              <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-mono bg-navy-dark border border-electric/20 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
-                {skill.name}
-              </span>
+              <OrbitIcon {...skill} />
             </motion.div>
           </motion.div>
-        </motion.div>
-      ))}
+        );
+      })}
+
+      {/* Inner orbit — counter-clockwise */}
+      {innerSkills.map((skill, i) => {
+        const start = (360 / innerSkills.length) * i;
+        return (
+          <motion.div
+            key={skill.name}
+            className="absolute"
+            style={{ width: 0, height: 0, left: '50%', top: '50%' }}
+            animate={{ rotate: [start, start - 360] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+          >
+            <motion.div
+              style={{ position: 'absolute', top: -(INNER_R + ICON / 2), left: -(ICON / 2) }}
+              animate={{ rotate: [-start, -start + 360] }}
+              transition={{ duration: 12, repeat: Infinity, ease: 'linear', repeatType: 'loop' }}
+            >
+              <OrbitIcon {...skill} />
+            </motion.div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

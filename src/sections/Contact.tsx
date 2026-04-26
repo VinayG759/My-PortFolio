@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const socialLinks = [
   {
@@ -44,22 +45,45 @@ const socialLinks = [
   },
 ];
 
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
 export function Contact() {
   const titleRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true, margin: '-80px' });
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [toast, setToast] = useState<{ text: string; ok: boolean } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const showToast = (text: string, ok: boolean) => {
+    setToast({ text, ok });
+    setTimeout(() => setToast(null), 4000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hi Vinay,\n\nMy name is ${formData.name} (${formData.email}).\n\n${formData.message}`
-    );
-    window.open(`mailto:vinayg1752004@gmail.com?subject=${subject}&body=${body}`);
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setSending(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  formData.name,
+          from_email: formData.email,
+          message:    formData.message,
+          to_name:    'Vinay',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setFormData({ name: '', email: '', message: '' });
+      showToast("Message sent! I'll get back to you soon.", true);
+    } catch {
+      showToast('Something went wrong. Please try again.', false);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -255,25 +279,22 @@ export function Contact() {
 
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-3.5 rounded-xl font-semibold font-mono text-navy text-sm relative overflow-hidden group"
+                disabled={sending}
+                whileHover={sending ? {} : { scale: 1.02, y: -1 }}
+                whileTap={sending ? {} : { scale: 0.98 }}
+                className="w-full py-3.5 rounded-xl font-semibold font-mono text-navy text-sm relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
-                  background: sent
-                    ? 'linear-gradient(135deg, #10B981, #059669)'
-                    : 'linear-gradient(135deg, #00D4FF, #0D7377)',
-                  boxShadow: sent
-                    ? '0 0 20px rgba(16,185,129,0.3)'
-                    : '0 0 20px rgba(0,212,255,0.25)',
-                  transition: 'all 0.4s ease',
+                  background: 'linear-gradient(135deg, #00D4FF, #0D7377)',
+                  boxShadow: '0 0 20px rgba(0,212,255,0.25)',
                 }}
               >
-                {sent ? (
+                {sending ? (
                   <span className="flex items-center justify-center gap-2">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                     </svg>
-                    Message Sent!
+                    Sending…
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">
@@ -315,6 +336,27 @@ export function Contact() {
           </button>
         </motion.div>
       </div>
+
+      {/* Toast notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            key="toast"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-xl font-mono text-sm text-white border whitespace-nowrap"
+            style={{
+              background:   toast.ok ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)',
+              borderColor:  toast.ok ? 'rgba(16,185,129,0.4)'  : 'rgba(239,68,68,0.4)',
+              boxShadow:    toast.ok ? '0 0 20px rgba(16,185,129,0.2)' : '0 0 20px rgba(239,68,68,0.2)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            {toast.text}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
