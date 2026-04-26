@@ -45,9 +45,9 @@ const socialLinks = [
   },
 ];
 
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'service_64vz0rn';
+const EMAILJS_TEMPLATE_ID = 'template_2q4q32p';
+const EMAILJS_PUBLIC_KEY  = 'i4wK01qibrZ9lEwvr';
 
 export function Contact() {
   const titleRef = useRef<HTMLDivElement>(null);
@@ -66,7 +66,8 @@ export function Contact() {
     e.preventDefault();
     setSending(true);
     try {
-      await emailjs.send(
+      // v4 requires publicKey inside an options object, not as a bare string
+      const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
@@ -75,11 +76,15 @@ export function Contact() {
           message:    formData.message,
           to_name:    'Vinay',
         },
-        EMAILJS_PUBLIC_KEY
+        { publicKey: EMAILJS_PUBLIC_KEY }
       );
+      console.log('[EmailJS] success:', response.status, response.text);
       setFormData({ name: '', email: '', message: '' });
       showToast("Message sent! I'll get back to you soon.", true);
-    } catch {
+    } catch (err: unknown) {
+      // EmailJS errors are objects with status + text fields
+      const ejsErr = err as { status?: number; text?: string };
+      console.error('[EmailJS] error:', ejsErr.status, ejsErr.text, err);
       showToast('Something went wrong. Please try again.', false);
     } finally {
       setSending(false);
