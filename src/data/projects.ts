@@ -19,6 +19,7 @@ export const projects: Project[] = [
       '6-agent AI system that autonomously builds full-stack applications from a single problem statement — planning, coding, testing, and deploying end-to-end.',
     tags: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Groq LLM', 'Tavily'],
     github: 'https://github.com/VinayG759',
+    live: 'https://nexus-flow-ai-dashboard.vercel.app/',
     status: 'completed',
     gradient: 'from-[#00D4FF]/20 via-[#0D7377]/10 to-transparent',
   },
