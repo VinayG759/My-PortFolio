@@ -36,29 +36,6 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: 'Terra Sentinel',
-    subtitle: 'Environmental Monitoring Dashboard',
-    description:
-      'Real-time environmental monitoring dashboard with live data visualization, alert thresholds, and geospatial overlays for tracking ecological changes.',
-    tags: ['React', 'TypeScript', 'Vite', 'shadcn/ui', 'Vercel'],
-    github: 'https://github.com/VinayG759',
-    live: 'https://terra-sentinel.vercel.app',
-    status: 'in-progress',
-    gradient: 'from-[#10B981]/20 via-[#0D7377]/10 to-transparent',
-  },
-  {
-    id: 4,
-    title: 'Chain Sentinel AI',
-    subtitle: 'Logistics Disruption Predictor',
-    description:
-      'AI-powered logistics disruption prediction platform that surfaces supply chain risks before they escalate, using time-series ML models on live logistics data.',
-    tags: ['React', 'TypeScript', 'Python', 'FastAPI', 'ML'],
-    github: 'https://github.com/VinayG759',
-    status: 'in-progress',
-    gradient: 'from-[#F59E0B]/20 via-[#0D7377]/10 to-transparent',
-  },
-  {
-    id: 5,
     title: 'Cryptoverse',
     subtitle: 'Real-Time Crypto Tracker',
     description:
@@ -69,7 +46,7 @@ export const projects: Project[] = [
     gradient: 'from-[#F97316]/20 via-[#0D7377]/10 to-transparent',
   },
   {
-    id: 6,
+    id: 4,
     title: 'Bipedal Walking Robot',
     subtitle: 'Embedded Robotics Project',
     description:
