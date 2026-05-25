@@ -17,7 +17,7 @@ export const projects: Project[] = [
     subtitle: 'Multi-Agent AI Workspace',
     description:
       '6-agent AI system that autonomously builds full-stack applications from a single problem statement — planning, coding, testing, and deploying end-to-end.',
-    tags: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Groq LLM', 'Tavily'],
+    tags: ['RAG', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Groq LLM', 'Tavily'],
     github: 'https://github.com/VinayG759',
     live: 'https://nexus-flow-ai-dashboard.vercel.app/',
     status: 'completed',
@@ -25,6 +25,17 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: 'OmniFlow AI',
+    subtitle: 'Multi-Channel AI Business Automation',
+    description:
+      'Minimum Viable Product for a multi-channel AI business automation platform — unified inbox, RAG-powered knowledge base, lead capture, appointment booking, and workflow automation engine.',
+    tags: ['Next.js', 'FastAPI', 'ChromaDB', 'Gemini API', 'RAG', 'TailwindCSS', 'SQLite'],
+    github: 'https://github.com/VinayG759/OmniFlow-AI',
+    status: 'completed',
+    gradient: 'from-[#6366F1]/20 via-[#0D7377]/10 to-transparent',
+  },
+  {
+    id: 3,
     title: 'CV Risk Detection',
     subtitle: 'Smart Supply Chain QA',
     description:
@@ -35,7 +46,7 @@ export const projects: Project[] = [
     gradient: 'from-[#7C3AED]/20 via-[#0D7377]/10 to-transparent',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Cryptoverse',
     subtitle: 'Real-Time Crypto Tracker',
     description:
@@ -46,7 +57,7 @@ export const projects: Project[] = [
     gradient: 'from-[#F97316]/20 via-[#0D7377]/10 to-transparent',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Bipedal Walking Robot',
     subtitle: 'Embedded Robotics Project',
     description:
