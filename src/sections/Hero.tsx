@@ -121,8 +121,8 @@ export function Hero() {
           <motion.a
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            href="/resume.pdf"
-            download="Vinay_G_Resume.pdf"
+            href="/Vinay_G_Resume.docx"
+            download="Vinay_G_Resume.docx"
             className="px-8 py-3.5 border border-electric/40 text-electric font-semibold font-mono rounded-full text-sm hover:bg-electric/8 transition-all duration-300"
             style={{ boxShadow: '0 0 10px rgba(0,212,255,0.1)' }}
             onMouseEnter={(e) =>
