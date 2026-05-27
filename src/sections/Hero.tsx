@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTypewriter } from '../hooks/useTypewriter';
+import resumeUrl from '../assets/vinay_resume.docx?url';
 
 const ParticleField = lazy(() =>
   import('../three/ParticleField').then((m) => ({ default: m.ParticleField }))
@@ -121,7 +122,7 @@ export function Hero() {
           <motion.a
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            href="/Vinay_G_Resume.docx"
+            href={resumeUrl}
             download="Vinay_G_Resume.docx"
             className="px-8 py-3.5 border border-electric/40 text-electric font-semibold font-mono rounded-full text-sm hover:bg-electric/8 transition-all duration-300"
             style={{ boxShadow: '0 0 10px rgba(0,212,255,0.1)' }}

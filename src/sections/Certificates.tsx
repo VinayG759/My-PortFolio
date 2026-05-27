@@ -14,6 +14,18 @@ const certificates = [
     color: '#00D4FF',
     icon: '🏆',
   },
+  {
+    id: 2,
+    title: 'Compete & Win: Summership 2026',
+    issuer: 'GradSkills',
+    date: 'May 27, 2026',
+    description:
+      'Recognised for successfully completing Round 1 of the Compete & Win: Summership 2026 — a competitive, cohort-based program by GradSkills that challenges students with real-world tech problems to fast-track their careers.',
+    skills: ['Problem Solving', 'Competitive Challenges', 'Career Development', 'Tech Skills'],
+    verified: true,
+    color: '#EC4899',
+    icon: '🎯',
+  },
 ];
 
 function CertCard({ cert, index }: { cert: typeof certificates[0]; index: number }) {
