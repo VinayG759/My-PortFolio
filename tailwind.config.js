@@ -4,55 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: '#0A0F1E',
-          light: '#0D1530',
-          dark: '#060B14',
-          card: 'rgba(13, 21, 48, 0.7)',
-        },
-        teal: {
-          portfolio: '#0D7377',
-          light: '#14A3A8',
-          dim: '#0A5C60',
-        },
-        electric: {
-          DEFAULT: '#00D4FF',
-          dim: '#0099BB',
-          glow: 'rgba(0, 212, 255, 0.3)',
-        },
+        paper: 'rgb(var(--paper) / <alpha-value>)',
+        raised: 'rgb(var(--raised) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        rule: 'rgb(var(--rule) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Newsreader', 'Georgia', 'serif'],
+        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 10s linear infinite',
-        float: 'float 6s ease-in-out infinite',
-        glow: 'glow 2s ease-in-out infinite alternate',
-        'border-glow': 'borderGlow 3s ease-in-out infinite alternate',
-        'scan': 'scan 3s linear infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-16px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 10px rgba(0,212,255,0.3), 0 0 20px rgba(0,212,255,0.1)' },
-          '100%': { boxShadow: '0 0 20px rgba(0,212,255,0.6), 0 0 40px rgba(0,212,255,0.3)' },
-        },
-        borderGlow: {
-          '0%': { borderColor: 'rgba(0,212,255,0.2)' },
-          '100%': { borderColor: 'rgba(0,212,255,0.7)' },
-        },
-        scan: {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(100vh)' },
-        },
-      },
-      backdropBlur: {
-        xs: '2px',
+      maxWidth: {
+        page: '68rem',
+        prose: '40rem',
       },
     },
   },

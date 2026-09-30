@@ -1,65 +1,28 @@
-import { useState, useEffect } from 'react';
-import { LoadingScreen } from './components/LoadingScreen';
-import { CustomCursor } from './components/CustomCursor';
-import { GrainOverlay } from './components/GrainOverlay';
-import { Navbar } from './components/Navbar';
-import { Hero } from './sections/Hero';
+import { Header } from './components/Header';
+import { Intro } from './sections/Intro';
+import { Work } from './sections/Work';
 import { About } from './sections/About';
-import { Projects } from './sections/Projects';
-import { Skills } from './sections/Skills';
-import { Certificates } from './sections/Certificates';
 import { Contact } from './sections/Contact';
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    if (loaded) {
-      // Init Lenis smooth scroll after site reveals
-      let lenis: { raf: (t: number) => void; destroy: () => void } | null = null;
-      let rafId: number;
-
-      import('lenis').then(({ default: Lenis }) => {
-        lenis = new Lenis({
-          lerp: 0.08,
-          smoothWheel: true,
-          touchMultiplier: 1.5,
-        });
-
-        const raf = (time: number) => {
-          lenis!.raf(time);
-          rafId = requestAnimationFrame(raf);
-        };
-        rafId = requestAnimationFrame(raf);
-      });
-
-      return () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        if (lenis) lenis.destroy();
-      };
-    }
-  }, [loaded]);
-
   return (
     <>
-      <GrainOverlay />
-      <CustomCursor />
-
-      {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
-
-      {loaded && (
-        <div className="relative bg-navy min-h-screen">
-          <Navbar />
-          <main>
-            <Hero />
-            <About />
-            <Projects />
-            <Skills />
-            <Certificates />
-            <Contact />
-          </main>
+      <a href="#work" className="plain sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-30">
+        Skip to work
+      </a>
+      <Header />
+      <main>
+        <Intro />
+        <Work />
+        <About />
+        <Contact />
+      </main>
+      <footer className="border-t border-rule">
+        <div className="page flex flex-wrap justify-between gap-2 py-8 text-[14px] text-muted">
+          <p>© {new Date().getFullYear()} Vinay G</p>
+          <p>Built with React, Vite and Tailwind.</p>
         </div>
-      )}
+      </footer>
     </>
   );
 }
