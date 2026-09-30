@@ -97,34 +97,9 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Python', 'AWS S3', 'DynamoDB', 'Strands Agents', 'Gemini', 'PWA'],
     links: [{ label: 'GitHub', href: 'https://github.com/VinayG759/BaseLine' }],
   },
-  {
-    slug: 'nexusflow',
-    name: 'NexusFlow',
-    year: '2026',
-    badge: 'Multi-agent app builder',
-    headline: 'Generating code is the easy part. Making it run is the hard part.',
-    problem:
-      'LLMs can write a full-stack app from a sentence, but the output rarely boots on the first try, and asking the model to fix its own mistakes is slow and costly.',
-    built:
-      'Describe an app in plain English. A chain of agents generates the project, then a DebuggingAgent repairs it, installs dependencies, boots the app to prove it runs, pushes it to GitHub and emits Kubernetes manifests.',
-    hardPart:
-      'The DebuggingAgent fixes the mistakes LLM code reliably makes with 27 deterministic repair rules and 10 static checks, without spending another model call.',
-    facts: ['27 repair rules', '10 static checks', 'RAG over known-good examples'],
-    stack: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'ChromaDB', 'Groq'],
-    links: [
-      { label: 'Live demo', href: 'https://nexus-flow-ai-dashboard.vercel.app' },
-      { label: 'GitHub', href: 'https://github.com/VinayG759/NexusFlow' },
-    ],
-  },
 ];
 
 export const earlierWork: { name: string; what: string; stack: string; href: string }[] = [
-  {
-    name: 'CV Risk Detection',
-    what: 'Defect detection for supply-chain QA. MobileNetV2 transfer learning, 86.96% validation accuracy.',
-    stack: 'TensorFlow · FastAPI · React',
-    href: 'https://github.com/VinayG759/CV-risk-detection',
-  },
   {
     name: 'Student Management System',
     what: 'CRUD REST API for student records.',
@@ -153,7 +128,7 @@ export const earlierWork: { name: string; what: string; stack: string; href: str
 
 export const toolbox: { area: string; items: string }[] = [
   { area: 'Languages', items: 'Python, TypeScript, JavaScript, Java, SQL' },
-  { area: 'AI', items: 'LLM agents and tool use (Claude, Gemini, Groq), MCP, RAG, pgvector, ChromaDB, TensorFlow' },
+  { area: 'AI', items: 'LLM agents and tool use (Claude, Gemini, Groq), MCP, RAG, pgvector' },
   { area: 'Backend', items: 'FastAPI, SQLAlchemy, Alembic, Node.js, Express, Spring Boot, pytest' },
   { area: 'Data & infra', items: 'PostgreSQL with row-level security, Supabase, MySQL, MongoDB, Docker, Kubernetes, Prometheus, AWS' },
   { area: 'Frontend', items: 'React, Next.js, Tailwind CSS, shadcn/ui, TanStack Query' },
