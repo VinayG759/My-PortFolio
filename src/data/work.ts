@@ -25,6 +25,24 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: 'omniconnect',
+    name: 'OmniConnect AI',
+    year: 'May 2026 —',
+    badge: 'Live product · built solo · began at SummerShip',
+    headline: 'One inbox for every channel a customer might write in on, with the AI answering first.',
+    problem:
+      'Small businesses get questions on WhatsApp, Instagram, Messenger, email, phone and their website. Replies are slow, leads slip through, and no one sees the whole picture.',
+    built:
+      'OmniConnect puts six channels in one inbox, with human takeover, notes, tasks and saved replies, plus a leads pipeline, bookings synced to Google Sheets, a form builder, automation rules and analytics. The AI answers only from the business’s own documents and sends the customer to a person instead of inventing a claim. It also answers phone calls in English and everyday Hindi, books demos from real free slots and saves the caller as a contact.',
+    hardPart:
+      'Keeping each business’s data apart, and keeping the AI honest. Tenants are separated by Postgres row-level security under a limited database user. Under load, some queries began returning zero rows: the connection pooler in transaction mode discards the per-connection tenant setting after every commit. Session pooling fixed it. On the AI side, a fact-check step sits after the answer, and a 35-question live test produced no invented facts.',
+    facts: ['760+ commits', '~1,860 automated tests', '56 migrations · 34 API routers', '6 channels incl. live phone calls', 'API types generated for the dashboard so the two cannot drift'],
+    stack: ['Next.js 16', 'React 19', 'FastAPI', 'SQLAlchemy', 'Alembic', 'Postgres + RLS', 'Gemini via OpenRouter', 'fastembed', 'Meta Graph API', 'Vobiz', 'Sarvam', 'Clerk'],
+    links: [{ label: 'omni-flow-ai.vercel.app', href: 'https://omni-flow-ai.vercel.app' }],
+    note: 'Private repository. Started under its earlier name, OmniFlow AI.',
+    image: { src: omniflow, alt: 'OmniConnect landing page: every customer message, answered' },
+  },
+  {
     slug: 'sentinelops',
     name: 'SentinelOps AI',
     year: '2026',
@@ -43,22 +61,20 @@ export const caseStudies: CaseStudy[] = [
     image: { src: sentinelops, alt: 'SentinelOps overview: service health, error rates and the agent activity log' },
   },
   {
-    slug: 'omniflow',
-    name: 'OmniFlow AI',
-    year: '2026 —',
-    badge: 'Live product · built solo',
-    headline: 'One inbox for every channel a customer might write in on.',
+    slug: 'fastforward',
+    name: 'Fastforward',
+    year: 'Oct 2026',
+    badge: 'In progress · PayPal Subscriptions',
+    headline: 'A flight simulator for PayPal Subscriptions, so billing bugs show up before customers do.',
     problem:
-      'Small businesses get questions on WhatsApp, Instagram, Messenger, email and their website. Replies are slow, leads slip through, and no one sees the whole picture.',
+      'Subscription billing fails in slow, ugly ways: a payment fails on day 12, a webhook arrives twice, a dispute lands late. The real sandbox can’t replay a bad month on demand.',
     built:
-      'OmniFlow puts all five channels in one inbox. An AI answers from the business’s own documents, refuses when nothing supports an answer, captures the lead, books the slot, and hands the conversation to a person when it should. It takes phone calls too: an AI voice agent that can transfer a live call into a human agent’s browser.',
+      'A stateful stand-in for PayPal Subscriptions and Disputes, built from PayPal’s official OpenAPI specs. It plays a 75-day “bad month” in seconds with AI-played customers who pay, fail or dispute, and sends signed webhooks that arrive duplicated, late, out of order or forged. It ships as three publishable packages, a CLI, an MCP server for coding assistants, and a demo on Railway.',
     hardPart:
-      'Keeping each business’s data apart. Tenants are separated by Postgres row-level security. Under load, some queries began returning zero rows. The cause was the connection pooler: in transaction mode it discards the per-connection tenant setting after every commit. Moving to session pooling, and a role that cannot bypass the rules, fixed it for good.',
-    facts: ['750+ commits', '1,500+ backend tests', '5 live channels + voice', 'In production on Supabase'],
-    stack: ['Next.js', 'FastAPI', 'SQLAlchemy', 'Postgres + RLS', 'Groq LLMs', 'Meta Graph API', 'Plivo', 'Clerk'],
-    links: [{ label: 'omni-flow-ai.vercel.app', href: 'https://omni-flow-ai.vercel.app' }],
-    note: 'Private repository.',
-    image: { src: omniflow, alt: 'OmniFlow landing page: every customer message, answered' },
+      'Trusting the verdict. Six deterministic checks, not the AI, decide pass or fail, so the model cannot talk a bug into passing. And the twin has to be faithful: the first comparison against PayPal’s real sandbox found 27 differences, now fixed to 0 across 7 of 7 endpoints.',
+    facts: ['376 unit tests + end-to-end', '27 → 0 differences vs real sandbox', '3 packages, CLI and MCP server'],
+    stack: ['TypeScript', 'Node.js', 'OpenAPI', 'Claude', 'MCP', 'Vitest', 'Railway'],
+    links: [{ label: 'GitHub', href: 'https://github.com/VinayG759/FastForward' }],
   },
   {
     slug: 'sangam',
@@ -95,7 +111,11 @@ export const caseStudies: CaseStudy[] = [
       'The model reads, code decides, the model explains. A wrong trend on a medical value is an invisible error, so the arithmetic never goes near the model, and every number in a translated summary is checked against the source.',
     facts: ['320+ tests', 'Built in a weekend with Chethan', 'Versioned API contract between us'],
     stack: ['Python', 'AWS S3', 'DynamoDB', 'Strands Agents', 'Gemini', 'PWA'],
-    links: [{ label: 'GitHub', href: 'https://github.com/VinayG759/BaseLine' }],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/VinayG759/BaseLine' },
+      { label: 'Participation certificate', href: '/certificates/WeMakeDevs_First_Commit_Vinay_G.pdf' },
+    ],
+    note: 'Built for First Commit, event 01 of the Bharat Builds Tour (WeMakeDevs × AWS).',
   },
 ];
 
@@ -128,8 +148,9 @@ export const earlierWork: { name: string; what: string; stack: string; href: str
 
 export const toolbox: { area: string; items: string }[] = [
   { area: 'Languages', items: 'Python, TypeScript, JavaScript, Java, SQL' },
-  { area: 'AI', items: 'LLM agents and tool use (Claude, Gemini, Groq), MCP, RAG, pgvector' },
-  { area: 'Backend', items: 'FastAPI, SQLAlchemy, Alembic, Node.js, Express, Spring Boot, pytest' },
-  { area: 'Data & infra', items: 'PostgreSQL with row-level security, Supabase, MySQL, MongoDB, Docker, Kubernetes, Prometheus, AWS' },
-  { area: 'Frontend', items: 'React, Next.js, Tailwind CSS, shadcn/ui, TanStack Query' },
+  { area: 'AI', items: 'LLM agents and tool use (Claude, Gemini, Gemma), OpenRouter, MCP, RAG, embeddings (fastembed), pgvector, prompt design with code-checked outputs' },
+  { area: 'Backend', items: 'FastAPI, Node.js, SQLAlchemy, Alembic, REST, webhooks, Server-Sent Events, GitHub Actions CI, pytest, Vitest, Playwright' },
+  { area: 'Data & infra', items: 'PostgreSQL with row-level security, Supabase, MySQL, MongoDB, AWS (S3, DynamoDB), Docker, Kubernetes, Prometheus, Railway, Vercel' },
+  { area: 'Frontend', items: 'Next.js, React, Tailwind CSS, shadcn/ui, TanStack Query, Leaflet maps' },
+  { area: 'Integrations', items: 'WhatsApp Cloud API, Messenger and Instagram (Meta Graph API), Telegram Bot API, Gmail and SMTP, Google Sheets API, Vobiz and Plivo voice, Sarvam and ElevenLabs speech, Freshservice, Clerk' },
 ];
