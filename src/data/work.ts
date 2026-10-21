@@ -1,6 +1,7 @@
 import sentinelops from '../assets/work/sentinelops.jpg';
 import omniflow from '../assets/work/omniflow.jpg';
 import sangam from '../assets/work/sangam.jpg';
+import fastforward from '../assets/work/fastforward.jpg';
 
 export interface Link {
   label: string;
@@ -75,6 +76,7 @@ export const caseStudies: CaseStudy[] = [
     facts: ['376 unit tests + end-to-end', '27 → 0 differences vs real sandbox', '3 packages, CLI and MCP server'],
     stack: ['TypeScript', 'Node.js', 'OpenAPI', 'Claude', 'MCP', 'Vitest', 'Railway'],
     links: [{ label: 'GitHub', href: 'https://github.com/VinayG759/FastForward' }],
+    image: { src: fastforward, alt: 'Fastforward run view: a virtual-date timeline per customer, a deliveries table and a report of failed checks' },
   },
   {
     slug: 'sangam',
@@ -121,22 +123,22 @@ export const caseStudies: CaseStudy[] = [
 
 export const earlierWork: { name: string; what: string; stack: string; href: string }[] = [
   {
-    name: 'Student Management System',
-    what: 'CRUD REST API for student records.',
-    stack: 'Spring Boot · MySQL',
-    href: 'https://github.com/VinayG759/Student-Management-System',
+    name: 'Citizen’s Voice',
+    what: 'Report a civic problem by phone in Kannada, Hindi or English; Gemma 4 acts as the clerk. Hacktoberfest Hack Day Bengaluru.',
+    stack: 'Python · Gemma 4 · Vobiz · Sarvam',
+    href: 'https://github.com/VinayG759/Citizen-s-Voice',
+  },
+  {
+    name: 'TaskPilot (Multi-Agent Task Management)',
+    what: 'Four Claude agents turn a Telegram message into a checked task, then remind the owner before it is due.',
+    stack: 'FastAPI · Claude · Telegram',
+    href: 'https://github.com/VinayG759/Multi-Agent-AI-Task-Management-System',
   },
   {
     name: 'Cryptoverse',
     what: 'Crypto prices, coin stats, exchanges and news.',
     stack: 'React · Redux Toolkit',
     href: 'https://github.com/VinayG759/Cryptoverse',
-  },
-  {
-    name: 'Weather Master',
-    what: 'Temperature, humidity, UV and air quality for any city.',
-    stack: 'JavaScript',
-    href: 'https://github.com/VinayG759/Weather-Master-',
   },
   {
     name: 'Bipedal Walking Robot',
